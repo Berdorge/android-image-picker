@@ -87,7 +87,7 @@ class DefaultImageFileLoader(private val context: Context) : ImageFileLoader {
             val useNewApi = Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
             val sourceUri = if (limit != null && useNewApi) {
                 getSourceUri().buildUpon()
-                    .appendQueryParameter(QUERY_LIMIT, limit.toString())
+//                    .appendQueryParameter(QUERY_LIMIT, limit.toString())
                     .build()
             } else {
                 getSourceUri()
