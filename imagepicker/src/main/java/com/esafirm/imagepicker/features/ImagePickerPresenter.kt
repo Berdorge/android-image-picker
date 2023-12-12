@@ -15,7 +15,6 @@ import com.esafirm.imagepicker.helper.state.ObservableState
 import com.esafirm.imagepicker.helper.state.asSingleEvent
 import com.esafirm.imagepicker.model.Folder
 import com.esafirm.imagepicker.model.Image
-import java.io.File
 
 internal class ImagePickerPresenter(
     private val imageLoader: DefaultImageFileLoader
@@ -74,10 +73,7 @@ internal class ImagePickerPresenter(
             return
 
         setState {
-            copy(finishPickImage = selectedImages.filter {
-                val file = File(it.path)
-                file.exists()
-            }.asSingleEvent())
+            copy(finishPickImage = selectedImages.asSingleEvent())
         }
     }
 

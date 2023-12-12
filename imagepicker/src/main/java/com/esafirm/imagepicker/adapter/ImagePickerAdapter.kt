@@ -25,7 +25,7 @@ class ImagePickerAdapter(
     context: Context,
     imageLoader: ImageLoader,
     selectedImages: List<Image>,
-    private val itemClickListener: OnImageClickListener
+    private val itemClickListener: OnImageClickListener,
 ) : BaseListAdapter<ImageViewHolder>(context, imageLoader) {
 
     private val listDiffer by lazy {
@@ -100,7 +100,7 @@ class ImagePickerAdapter(
     }
 
     private fun isSelected(image: Image): Boolean {
-        return selectedImages.any { it.path == image.path }
+        return selectedImages.any { it.id == image.id }
     }
 
     override fun getItemCount() = listDiffer.currentList.size
@@ -118,7 +118,9 @@ class ImagePickerAdapter(
 
     private fun removeSelectedImage(image: Image, position: Int) {
         mutateSelection {
-            selectedImages.remove(image)
+            selectedImages.removeAll {
+                it.id == image.id
+            }
             notifyItemChanged(position)
         }
     }
